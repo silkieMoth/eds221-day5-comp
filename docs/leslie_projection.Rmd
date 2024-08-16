@@ -1,6 +1,8 @@
 ---
 title: "The Leslie Matrix - revisited"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -44,15 +46,20 @@ Add line-by-line comments wheres prompted in the code below, explaining what eac
 # ------ comment line-by-line ---- #
 
 # The line below...
+# set time_yr to each year that leslie matrix will be run
 time_yr <- seq(from = 0, to = 8, by = 1)
 
 # The line below...
+#make blank matrix for outputs to go into
 proj_year <- matrix(ncol = length(fish_year0), nrow = length(time_yr))
 
 # The line below...
+# insert initial conditions into matrix
 proj_year[1, ] <- fish_year0
 
 # The for loop below...
+# for each year, run through the matrix and insert values by conditions in the leslie matrix
+# previous years pops by the values in leslie matrix
 for (i in 2:length(time_yr)) {
   proj_year[i,] <- fish_leslie %*% proj_year[i-1,]
 }
